@@ -1,0 +1,153 @@
+<section id="requestform">
+	<div class="container">
+		<header class="text-center mb-60">
+			<h2>Request a Quote</h2>
+			<hr />
+		</header>
+		<div class="row">
+			<!-- FORM -->
+			<div class="col-md-8 col-sm-8">
+				<h3>Request Form: </h3>
+					<div class="row">
+						<div class="col-md-6">
+							<label for="quote_Full_Name" >Full Name : </label>
+							<input class="used-in-calc" id="quote_Full_Name" type = "text"  name="quote[Full_Name]"  >
+						</div>
+						<div class="col-md-6">
+							<label for="quote_Phone_Number">Phone Number : </label>
+							<input  class="used-in-calc" name="quote[Phone_Number]" id="quote_Phone_Number" type="text">
+						</div>
+						<div class="col-md-6">
+							<label for="quote_Company_Name">Company Name :</label>
+							<input  class="used-in-calc" name="quote[Company_Name]" id="quote_Company_Name" type="text">
+						</div>
+						<div class="col-md-6">
+							<label for="quote_Email">Email :</label>
+							<input  class="used-in-calc" name="quote[Email]" id="quote_Email" type="text">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<label for="quote_Building_Type" >Building Type : </label>
+							<select id="buildingSelect" required class="form-control pointer"  name="quote[Building_Type]" >
+								<option value="">--- Select ---</option>
+								<option value="Residential">Residential</option>
+								<option value="Commercial">Commercial</option>
+								<option value="Corporate">Corporate</option>
+								<option value="Hybrid">Hybrid</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-4 r-form r-form-res">
+							<label for="quote_Nb_Appartement" >Nb Appartementme : </label>
+							<input class="used-in-calc" name="quote[Nb_Appartement]" id="quote_Nb_Appartement" type="text" >
+						</div>
+						<div class="col-md-4 r-form r-form-com r-form-hyb">
+							<label for="quote_Nb_Business">Nb Business</label>
+							<input name="quote[Nb_Business]" id="quote_Nb_Business" type="text">
+						</div>
+						<div class="col-md-4 r-form r-form-cor">
+							<label for="quote_Full_Name"># of Companies</label>
+							<input name="quote[Nb_Company]" id="" type="text">
+						</div>
+						<div class="col-md-4 r-form r-form-res r-form-com r-form-cor r-form-hyb">
+							<label for="quote_Nb_Floor"> Nb Floor : </label>
+							<input class="used-in-calc" name="quote[Nb_Floor]" id="quote_Nb_Floor" type="text">
+						</div>
+						<div class="col-md-4 r-form r-form-res r-form-com r-form-cor r-form-hyb">
+							<label for="quote_Nb_Basement"> Nb Basement : </label>
+							<input  class="used-in-calc" name="quote[Nb_Basement]" id="quote_Nb_Basement" type="text"> 
+						</div>
+					</div>
+
+
+					<div class="row">
+						<div class="col-md-4 r-form r-form-com r-form-cor r-form-hyb">
+							<label for="quote_Nb_Parking">Nb Parking  : </label>
+							<input class="used-in-calc" name="quote[Nb_Parking]" id="quote_Nb_Parking" type="text">
+						</div>
+						<div class="col-md-4 r-form r-form-com">
+							<label for="quote_Nb_Cage">Nb Cage  : </label>
+							<input class="used-in-calc" name="quote[Nb_Cage]" id="quote_Nb_Cage" type="text">
+						</div>
+						<div class="col-md-4 r-form r-form-cor r-form-hyb">
+							<label for="quote_Nb_OccupantPerFloor">Nb_OccupantPerFloor : </label>
+							<input class="used-in-calc" name="quote[Nb_OccupantPerFloor]" id="quote_Nb_OccupantPerFloor" type="text">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2 r-form r-form-hyb">
+							<label for="quote_Nb_OperatingHour">Active Hours/day</label>
+							<select id="actHours" class="form-control pointer" name="quote[Nb_OperatingHour]">
+								<option value="">-Select-</option>
+							</select>
+						</div>
+					</div>
+
+					<!-- radio buttons -->
+					<div class="row">
+						<div class="col-md-12 r-form r-form-elev">
+							<label>Product: </label>
+							<label class="radio" for="quote-form:std">
+								<input class="radio-prod" type="radio" name="quote[Product_Grade]" value="std" id="quote-form:std">
+								<i></i> Standard
+							</label>
+							<label class="radio" for="quote-form:prem">
+								<input class="radio-prod" type="radio" name="quote[Product_Grade]" value="prem" id="quote-form:prem">
+								<i></i> Premium
+							</label>
+							<label class="radio" for="quote-form:exc">
+								<input class="radio-prod" type="radio" name="quote[Product_Grade]" value="exc" id="quote-form:exc">
+								<i></i> Excelium
+							</label>
+						</div>
+					</div>
+
+					<div class="row">
+						<p id="error-msg"></p>
+					</div>
+				</div>
+				<div class="col-lg-3 col-sm-4 mt-60">
+					<!-- Elevator calc + price -->	
+					<div class="toggle-transparent toggle-bordered-full clearfix">
+						<div class="active">
+							<div class="toggle-content">
+								<span class="clearfix">
+									<span class="float-right"></span>
+									<strong class="float-left"># of Elevators</strong>
+								</span>
+								<span class="clearfix">
+									<strong class="float-left">   Suggested:</strong>
+									<input id="calc-elev" type="text" class="float-right" name="quote[Nb_Ele_Suggested]" value="" readonly>
+								</span>
+								<hr />
+								<span class="clearfix">
+									<strong class="float-left">Price/Elevator:</strong>
+									<input id="calc-elev-price" type="text" class="float-right" name="quote[Price_Per_Ele]" value="" readonly>
+								</span>
+								<hr />
+							</div>
+						</div>
+					</div>
+					<!-- Price Calc -->														
+					<div class="toggle-transparent toggle-bordered-full clearfix">
+						<div class="active">
+							<div class="toggle-content">
+								
+								<span class="clearfix">
+									<strong class="float-left">Subtotal:</strong>
+									<input id="calc-subtotal" type="text" class="float-right" name="quote[Subtotal]" value="" readonly>
+								</span>
+								<span class="clearfix">
+									<span class="float-left">Install fee:</span>
+									<input id="calc-tax" type="text" class="float-right" name="quote[Install_Fee]" value="" readonly>
+								</span>
+								<hr />
+								<span class="clearfix">
+									<strong class="float-left">TOTAL:</strong>
+									<input id="calc-total" type="text" class="float-right" name="quote[Final_Price]" value="" readonly>
+								</span>
+								<hr />
+								<%# <a href="#" class="btn btn-primary btn-lg btn-block fs-15"><i class="fa fa-mail-forward"></i>Checkout</a> %>

@@ -1,0 +1,5 @@
+<%= form_with model: @lead, url:{action:"create"}, multipart: true do |f| %>
+        <%= render partial: "leads/index", :locals =>{:f => f}  %>
+                <%= f.submit("Submit", :class => "btn btn-primary btn-lg btn-block fs-15")  %>
+        <%= render partial: "leads/index_end", :locals =>{:f => f}  %>
+<% end %>

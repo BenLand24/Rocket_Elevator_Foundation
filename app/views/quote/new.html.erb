@@ -1,0 +1,5 @@
+<%= form_for @quote, url:{action:"create"} do |f| %>
+        <%= render partial: "quote/form", :locals =>{:f => f}  %>
+                <%= f.submit("Submit", :class => "btn btn-primary btn-lg btn-block fs-15")  %>
+        <%= render partial: "quote/form_end", :locals =>{:f => f}  %>
+<% end %>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	</head>
+
+	<body class="smoothscroll enable-animation grain-blue">
+		<!-- FORM -->
+		<section id="requestform">
+			<div class="container">
+				<header class="text-center mb-60">
+					<h2>Request a Quote</h2>
+					<hr />
+				</header>
+
+				<div class="row">
+					<!-- FORM -->
+					<div class="col-md-8 col-sm-8">
+						<h3>Request Form: </h3>
+						<!-- Quote Form -->
+						<form id="quote-form" action="create" method="post" enctype="text/plain">
+							<fieldset>
+								<div class="row">
+									<div class="col-md-4">
+										<label for="buildingSelect">Building Type: </label>
+										<select id="buildingSelect" required class="form-control pointer" name="quote-form[buildingSelect]">
+											<option value="">--- Select ---</option>
+											<option value="0">Residential</option>
+											<option value="">Commercial</option>
+											<option value="Corporate">Corporate</option>
+											<option value="Hybrid">Hybrid</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-4 r-form r-form-res">
+										<label for="cNumApt"># of Apartments</label>
+										<input type="number" min="0" step="1" name="quote-form[cNumApt]" id="cNumApt" class="used-in-calc">
+									</div>
+									<div class="col-md-4 r-form r-form-com r-form-hyb">
+										<label for="cNumBsns"># of Business</label>
+										<input type="number" min="0" step="1" name="quote-form[cNumBsns]" id="cNumBsns">
+									</div>
+									<div class="col-md-4 r-form r-form-cor">
+										<label for="cNumCom"># of Companies</label>
+										<input type="number" min="0" step="1" name="quote-form[cNumCom]" id="cNumCom">
+									</div>
+									<div class="col-md-4 r-form r-form-res r-form-com r-form-cor r-form-hyb">
+										<label for="cNumFlr"># of Floors</label>
+										<input type="number" min="0" step="1" name="quote-form[cNumFlr]" id="cNumFlr" class="used-in-calc">
+									</div>
+									<div class="col-md-4 r-form r-form-res r-form-com r-form-cor r-form-hyb">
+										<label for="cNumBsmt"># of Basements</label>
+										<input type="number" min="0" step="1" name="quote-form[cNumBsmt]" id="cNumBsmt" class="used-in-calc"> 
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col-md-4 r-form r-form-com r-form-cor r-form-hyb">
+										<label for="cNumPark"># of parking spaces</label>
+										<input type="number" min="0" step="1" name="quote-form[cNumPark]" id="cNumPark">
+									</div>
+									<div class="col-md-4 r-form r-form-com">
+										<label for="cNumElev"># of Elevator Cages</label>
+										<input type="number" min="0" step="1" name="quote-form[cNumElev]" id="cNumElev" class="used-in-calc">
+									</div>
+									<div class="col-md-4 r-form r-form-cor r-form-hyb">
+										<label for="cNumOcc"># of 🧑 per Floor</label>
+										<input type="number" min="0" step="1" name="quote-form[cNumOcc]" id="cNumOcc" class="used-in-calc">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-2 r-form r-form-hyb">
+										<label for="actHours">Active Hours/day</label>
+										<select id="actHours" class="form-control pointer" name="quote-form[actHours]">
+											<option value="">-Select-</option>
+										</select>
+									</div>
+								</div>
+
+								<!-- radio buttons -->
+								<div class="row">
+									<div class="col-md-12 r-form r-form-elev">
+										<label>Product: </label>
+										<label class="radio" for="quote-form:std">
+											<input class="radio-prod" type="radio" name="radio-btn" value="std" id="quote-form:std">
+											<i></i> Standard
+										</label>
+										<label class="radio" for="quote-form:prem">
+											<input class="radio-prod" type="radio" name="radio-btn" value="prem" id="quote-form:prem">
+											<i></i> Premium
+										</label>
+										<label class="radio" for="quote-form:exc">
+											<input class="radio-prod" type="radio" name="radio-btn" value="exc" id="quote-form:exc">
+											<i></i> Excelium
+										</label>
+									</div>
+								</div>
+
+								<div class="row">
+									<p id="error-msg"></p>
+								</div>
+							</fieldset>
+						</form>
+						<!-- /Quote Form -->
+					</div>
+					<!-- /FORM -->
+
+					<!-- RIGHT -->
+					<div class="col-lg-3 col-sm-4 mt-60">
+
+						<!-- Elevator calc + price -->														
+						<div class="toggle-transparent toggle-bordered-full clearfix">
+							<div class="active">
+								<div class="toggle-content">
+									
+									<span class="clearfix">
+										<span class="float-right"></span>
+										<strong class="float-left"># of Elevators</strong>
+									</span>
+									<span class="clearfix">
+										<span id="calc-elev" class="float-right"></span>
+										<strong class="float-left">   Suggested:</strong>
+									</span>
+									<hr />
+									<span class="clearfix">
+										<span id="calc-elev-price" class="float-right"></span>
+										<strong class="float-left">Price/Elevator:</strong>
+									</span>
+									<hr />
+								</div>
+							</div>
+						</div>
+
+						<!-- Price Calc -->														
+						<div class="toggle-transparent toggle-bordered-full clearfix">
+							<div class="active">
+								<div class="toggle-content">
+									
+									<span class="clearfix">
+										<span id="calc-subtotal" class="float-right"></span>
+										<strong class="float-left">Subtotal:</strong>
+									</span>
+									<span class="clearfix">
+										<span id="calc-tax" class="float-right"></span>
+										<span class="float-left">Install fee:</span>
+									</span>
+									<hr />
+									<span class="clearfix">
+										<span id="calc-total" class="float-right fs-20"></span>
+										<strong class="float-left">TOTAL:</strong>
+									</span>
+									<hr />
+									<a href="#" class="btn btn-primary btn-lg btn-block fs-15"><i class="fa fa-mail-forward"></i>Checkout</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /RIGHT -->
+				</div>
+			</div>
+		</section>
+		<!-- /FORM -->
+		<%= javascript_include_tag "calculator" %>
+	</body>
+</html>
