@@ -18,8 +18,8 @@ module SendSms
             client.messages.create(
                 from: from,
                 to: to,
-                body: "Hello technician, Antoine Deblonde. 
-                The elevator##{ele_id} in building##{building_id} need of your service.
+                body: "Hello technician, Patrick Thibault. 
+                The elevator##{ele_id} in building##{building_id} is in need of your service.
                 It's current status has been set to #{new_status}."
             )
             puts "msg sent?"

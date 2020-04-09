@@ -1,0 +1,117 @@
+<div class="tab-content" id="submission-tabContent">
+
+    <section id="intervention">
+        
+        <div class="container">
+            <div class="heading-title heading-dotted text-center">
+                <h2 style="color: royalblue">Interventions</h2>
+            </div>
+        </div>
+        
+        <%= form_for :interventions, url: url_for(controller: 'interventions', action: 'create_intervention'),  :html => {id: "interventionSubmit", :class => "text-center"} do |f|%>
+            <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+            
+            <fieldset>
+                <input type="hidden" name="action" value="intervention_send" />
+
+                <div class="col-md-6 mx-auto text-center text-blue offset-md-3">
+                    <label for="intervention_clients"><b>CLIENTS *</b></label>
+                    <select id="client" onChange="change_client()" class="form-control pointer" name="intervention[customer_id]" required>
+                        <option value="">--- Select One ---</option>
+                        <% @clients.each do |c|%>
+                            <option value="<%= c.id %>"><%= c.company_name %></option>
+                        <% end %>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mx-auto text-center text-blue offset-md-3">
+                    <label for="intervention_building"><b>BUILDING *</b></label>
+                    <select id="select_building" onChange="change_building()" class="form-control pointer" name="intervention[building_id]" required>
+                    <option value="">--- Select One ---</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3 mx-auto col text-blue align-self-center text-center">
+                    <label for="intervention_battery"><b>BATTERY *</b></label>
+                    <select id="select_battery" onChange="change_battery()" class="form-control pointer" name="intervention[battery_id]" required>
+                    <option value="">--- Select One ---</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3 mx-auto text-blue justify-content-center text-center">
+                    <label for="intervention_column"><b>COLUMN *</b></label>
+                    <select id="select_column" onChange="change_column()" class="form-control pointer" name="intervention[column_id]" required>
+                        <option value="">--- Select One ---</option>
+                        <option value="Nil">N/Ap</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3 mx-auto text-blue text-center">
+                    <label for="intervention_elevator"><b>ELEVATOR *</b></label>
+                    <select id="elevator" class="form-control pointer" name="intervention[elevator_id]" required>
+                        <option value="">--- Select One ---</option>
+                        <option value="Nil">N/Ap</option>
+                    </select>
+                </div>
+
+                <hr>
+
+                <div class="col-md-3 mx-auto text-blue text-center">
+                    <label for="intervention_employee"><b>EMPLOYEE</b></label>
+                    <select id="employee" class="form-control pointer" name="intervention[employee_id]">
+                        <option value="">--- None ---</option>
+                        <% @employee.each do |e|%>
+                            <option value="<%= e.id %>"><%= e.first_name%> <%= e.last_name%></option>
+                        <% end %>
+                    </select>
+                </div>
+
+                <div class="col-md-12 mx-auto text-blue text-center">
+                    <label for="intervention_description"><b>Intervention Description *</b></label>
+                    <textarea required rows="4" class="form-control" name="intervention[report]" required id="intervention:description"></textarea>
+                </div>
+
+
+                <div class="row">
+                
+                    <div class="col-md-12 text-center">
+                        <p>
+                            <%= button_tag(class: "btn btn-red btn-danger btn-outline-primary") do %>
+                                <i class="fa fa-check"></i> SUBMIT INTERVENTION
+                            <% end %>
+                        </p>
+                    </div>
+
+                </div>
+                        
+                <!-- divider -->
+                <div class="divider divider-center divider-color">
+                    <i class="fa fa-chevron-up"></i>
+                </div>
+
+            </fieldset>
+
+            <script>
+            $( document ).ready(function() {
+                $("#interventionSubmit").submit(function(event){
+                    event.preventDefault(); //prevent default action 
+                    var post_url = $(this).attr("action"); //get form action url
+                    var request_method = $(this).attr("method"); //get form GET/POST method
+                    var form_data = $(this).serialize(); //Encode form elements for submission
+                    
+                    $.ajax({
+                        url : post_url,
+                        type: request_method,
+                        data : form_data
+                    }).done(function(response){ 
+                        alert('THANK YOU! YOUR TICKET HAS BEEN RECEIVED');
+                        window.location="/";
+                    });
+                    return false;
+                });
+            });
+
+            </script>
+        <% end %>
+    </section>
+</div>

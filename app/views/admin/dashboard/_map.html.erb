@@ -1,0 +1,58 @@
+<img src="https://i.ibb.co/QPffnV9/kombuchaahh.jpg">
+<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+<div id="map" style="width: 500px; height: 400px;"></div>
+<div class="testing"></div>
+<script type="text/javascript">
+    locations = [];
+    floors = [];
+    names = [];
+    nb_batteries = [];
+    nb_columns = [];
+    nb_elevators = [];
+    tech_names = [];
+    <% Building.all.each do |building| %>
+        var f=0, x=0, y=0, z=0;
+        locations.push(<%= raw(building.address.to_json) %>);
+        names.push(<%= raw(building.customer.to_json) %>);
+        tech_names.push(<%= raw(building.to_json) %>)
+        x = x + <%= building.batteries.count %>;
+        <% building.batteries.all.each do |battery| %>
+            y = y + <%= battery.columns.count %>;
+            <% battery.columns.all.each do |column| %>
+                f = f + <%= column.number_floors %>;
+                z = z + <%= column.elevators.count %>;
+            <% end %>
+        <% end %>
+        floors.push(f);
+        nb_batteries.push(x);
+        nb_columns.push(y);
+        nb_elevators.push(z);
+    <% end %>
+    
+    
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 4,
+        center: new google.maps.LatLng(44.99, -98.5),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+    var infowindow = new google.maps.InfoWindow();
+    var marker, i;
+    for (i = 0; i < locations.length; i++) {  
+        marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i].lat, locations[i].long),
+        map: map
+        });
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+            infowindow.setContent('<b>' + locations[i].number_n_street + '</b>' 
+            + '<br>' + names[i].company_name
+            + '<br> <br>' + 'floors: ' + floors[i]
+            + '<br>' + 'batteries: ' + nb_batteries[i]
+            + '<br>' + 'columns: ' + nb_columns[i]
+            + '<br>' + 'elevators: ' + nb_elevators[i]
+            + '<br>' + 'technical contact: ' + tech_names[i].tech_full_name);
+            infowindow.open(map, marker);
+        }
+        })(marker, i));
+    }
+</script>

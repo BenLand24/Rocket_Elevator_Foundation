@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :interventions
   devise_for :users
   devise_for :employees, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -18,16 +19,17 @@ Rails.application.routes.draw do
   get 'sign_up' => 'users#sign_up'
   get 'sign_in' => 'users#sign_in'
   get 'leads' => 'leads#new'
+  get 'welcome' => 'watson#welcome'
+  
+  post '/new_intervention' => 'interventions#new_intervention'
+  post '/create_intervention' => 'interventions#create_intervention'
+  post '/intervention_ticket' => 'interventions#intervention_ticket'
 
-  # namespace :admin do
-  #   resources :addresses do
-  #     resources :customers do
-  #       resources :buildings do
-  #         resources :building_details
-  #       end
-  #     end
-  #   end
-  # end
-
+  resources :interventions do 
+    get :get_building, on: :collection
+    get :get_battery, on: :collection
+    get :get_column, on: :collection
+    get :get_elevator, on: :collection
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

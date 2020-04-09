@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one:
+  author: one
+  customer: one
+  building: one
+  battery: one
+  column: one
+  elevator: one
+  employee: one
+  interventionStartTime: 2020-04-09 17:13:32
+  interventionEndTime: 2020-04-09 17:13:32
+  result: MyString
+  report: MyString
+  status: MyString
+
+two:
+  author: two
+  customer: two
+  building: two
+  battery: two
+  column: two
+  elevator: two
+  employee: two
+  interventionStartTime: 2020-04-09 17:13:32
+  interventionEndTime: 2020-04-09 17:13:32
+  result: MyString
+  report: MyString
+  status: MyString
