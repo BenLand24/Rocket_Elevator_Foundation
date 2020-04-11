@@ -1,5 +1,5 @@
 class InterventionsController < ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def new
       @clients = Customer.order(:company_name)
@@ -10,7 +10,7 @@ class InterventionsController < ApplicationController
   end
 
   def get_buildings_for_client
-      id_client = params[:client_id]
+      id_client = params[:Customer]
       @buildings = Building.where(customer_id: id_client)
       render json: @buildings
   end    
@@ -37,7 +37,7 @@ class InterventionsController < ApplicationController
       params["intervention"].delete("elevator_id") if params["intervention"]["elevator_id"] == "Nil"
       attributes = params[:intervention].permit!
 
-      attributes[:author_id] = current_user.employee.id 
+      attributes[:author_id] = current_user.employee_id.id 
       
       intervention = Intervention.new(attributes)
       intervention.save!
