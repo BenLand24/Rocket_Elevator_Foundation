@@ -42,17 +42,26 @@ class InterventionsController < ApplicationController
 
 
   def create_intervention
-    @intervention = Intervention.new(intervention_params)
-      params["intervention"].delete("column_id") if params["intervention"]["column_id"] == nil
-      params["intervention"].delete("elevator_id") if params["intervention"]["elevator_id"] == nil
-      attributes = params[:intervention].permit!
-      puts "Hello"
-      employee = current_user.employee_id
+    intervention = Intervention.new(intervention_params)
+    #   params["intervention"].delete("column_id") if params["intervention"]["column_id"] == nil
+    #   params["intervention"].delete("elevator_id") if params["intervention"]["elevator_id"] == nil
+    #   attributes = params[:intervention].permit!
+      puts current_user
+      puts author_id
+    #   employee = current_user.employee_id
       
-      attributes[:author_id] = current_user.employee_id
+    #   intervention[:author_id] = current_user.employee_id
       
-      intervention = Intervention.new(attributes)
-      intervention.save!
+    #   intervention = Intervention.new(attributes)
+    #   intervention.save!
+
+    if intervention.save
+        flash[:notice] = "Successfull"
+        redirect_to :index
+    else
+        flash[:notice] = "Failed"
+        redirect_to action:"new"
+    end
 
     #   intervention_ticket(intervention)
   end 
