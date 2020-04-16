@@ -22,7 +22,7 @@ Employee.create!(first_name: 'ibrahim', last_name: 'mahamane', title: 'coach', e
 require 'faker'
 require 'date'
 
-300.times do |n|
+15.times do |n|
     nameF = Faker::Name.name
     businessF = Faker::Company.name
     emailF = Faker::Internet.email

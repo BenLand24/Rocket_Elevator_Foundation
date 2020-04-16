@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   
-  resources :interventions
   devise_for :users
   devise_for :employees, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -8,7 +7,6 @@ Rails.application.routes.draw do
   resources :quote
   resources :leads
 
-  
   root 'leads#new'
 
   get 'index' => 'leads#new' # index
@@ -24,6 +22,7 @@ Rails.application.routes.draw do
   post '/new_intervention' => 'interventions#new_intervention'
   post '/create_intervention' => 'interventions#create_intervention'
   post '/intervention_ticket' => 'interventions#intervention_ticket'
+
 
   resources :interventions do 
     get :get_building, on: :collection

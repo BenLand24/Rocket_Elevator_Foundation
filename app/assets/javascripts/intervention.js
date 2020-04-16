@@ -1,27 +1,25 @@
 function change_client() {
-  $.get("get_buildings_for_client?client_id=" + $("#client").val(), function(
-    list_buildings
-  ) {
+   $.get("get_building?id=" + $("#client").val(),
+    function(list_buildings) {
     html = "<option value>--- Select One ---</option>";
-    for (var i = 0; i < list_buildings.length; i++) {
+    for (var i = 0; i < list_buildings.buildings.length; i++) {
       html =
         html +
         "<option value='" +
-        list_buildings[i].id +
+        list_buildings.buildings[i].id +
         "'>" +
-        list_buildings[i].building_name +
+        list_buildings.buildings[i].id + " city: " + list_buildings.address[i] +
         "</option>";
     }
     $("#select_building").html(html);
     change_building();
-    change_battery();
-    change_column();
-  });
+   }
+  );
 }
 
+
 function change_building() {
-  $.get(
-    "get_batteries_for_building?building_id=" + $("#select_building").val(),
+  $.get("get_battery?id=" + $("#select_building").val(),
     function(list_batteries) {
       html = "<option value>--- Select One ---</option>";
       for (var i = 0; i < list_batteries.length; i++) {
@@ -35,14 +33,12 @@ function change_building() {
       }
       $("#select_battery").html(html);
       change_battery();
-      change_column();
     }
   );
 }
 
 function change_battery() {
-  $.get(
-    "get_columns_for_battery?battery_id=" + $("#select_battery").val(),
+  $.get("get_column?battery_id=" + $("#select_battery").val(),
     function(list_columns) {
       html =
         "<option value>--- Select One ---</option><option value>--- N/Ap ---</option>";
@@ -62,8 +58,7 @@ function change_battery() {
 }
 
 function change_column() {
-  $.get(
-    "get_elevators_for_column?column_id=" + $("#select_column").val(),
+  $.get("get_elevator?column_id=" + $("#select_column").val(),
     function(list_elevators) {
       html =
         "<option value>--- Select One ---</option><option value>--- N/Ap ---</option>";
