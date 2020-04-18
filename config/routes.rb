@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "users/registrations" }
+  # devise_for :users
   devise_for :employees, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :pages
