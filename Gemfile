@@ -45,12 +45,12 @@ gem 'whenever', require: false
 gem "chartkick"
 gem 'groupdate'
 gem "figaro"
-
+gem 'rspec', '~> 3.0'
+gem "rspec-rails", :group => [:development, :test]
 # slack api
 # gem 'slack-ruby-client'
 # gem 'async-websocket', '~> 0.8.0'
 gem 'http'
-
 
 # zendesk api
 gem "zendesk_api", git: 'https://github.com/zendesk/zendesk_api_client_rb'

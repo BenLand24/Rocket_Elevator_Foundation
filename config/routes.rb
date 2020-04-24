@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get 'sign_in' => 'users#sign_in'
   get 'leads' => 'leads#new'
   get 'welcome' => 'watson#welcome'
+  get 'ElevatorMedia' => 'pages#elevatormedia'
   
   post '/new_intervention' => 'interventions#new_intervention'
   post '/create_intervention' => 'interventions#create_intervention'
