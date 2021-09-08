@@ -110,4 +110,4 @@ gem 'dropbox_api'
 #Aesthetics
 gem "active_material", github: "vigetlabs/active_material"
 gem "recaptcha", require: "recaptcha/rails"
-gem 'better_errors', '~> 2.5', '>= 2.5.1'
+gem 'better_errors', '~> 2.8'
